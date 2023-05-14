@@ -8,7 +8,6 @@ public class InMemoryCacheApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InMemoryCacheApplication.class, args);
-		System.out.println("start");
 	}
 
 }
