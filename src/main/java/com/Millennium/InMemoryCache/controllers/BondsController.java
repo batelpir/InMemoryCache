@@ -29,6 +29,7 @@ public class BondsController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // addition - not in the assignment scope
     @DeleteMapping("/bond/{bondId}")
     public ResponseEntity<Void> deleteBond(@PathVariable String bondId){
         service.remove(bondId);

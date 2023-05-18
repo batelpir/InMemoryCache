@@ -22,8 +22,9 @@ public class CacheService<K,V> implements Map<K,V>{
     public synchronized void put(K key, V value) {
         int index = getIndex(key);
         if (entries[index] == null) {
-            entries[index] = new Entry<K,V>(key, value);
+            entries[index] = new Entry<>(key, value);
             size++;
+            // when the size is bigger than it needs - resize the array
             if (size > entries.length * LOAD_FACTOR) {
                 resize();
             }
@@ -56,7 +57,7 @@ public class CacheService<K,V> implements Map<K,V>{
         entries = newEntries;
     }
 
-    // addition - thought that necessary
+    // addition - not in the assignment scope
     public void remove(K key) {
         int index = getIndex(key);
         if (entries[index] != null) {
