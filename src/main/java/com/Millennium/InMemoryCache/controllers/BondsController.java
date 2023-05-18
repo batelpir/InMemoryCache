@@ -29,4 +29,10 @@ public class BondsController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/bond/{bondId}")
+    public ResponseEntity<Void> deleteBond(@PathVariable String bondId){
+        service.remove(bondId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

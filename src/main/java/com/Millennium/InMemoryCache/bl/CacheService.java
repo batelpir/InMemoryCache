@@ -1,5 +1,6 @@
 package com.Millennium.InMemoryCache.bl;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,8 @@ public class CacheService<K,V> implements Map<K,V>{
     private final int capacity = 16;
     private static final double LOAD_FACTOR = 0.75;
 
-    public CacheService() {
+    @PostConstruct
+    public void init() {
         entries = new Entry[capacity];
         size = 0;
     }
@@ -52,6 +54,15 @@ public class CacheService<K,V> implements Map<K,V>{
             }
         }
         entries = newEntries;
+    }
+
+    // addition - thought that necessary
+    public void remove(K key) {
+        int index = getIndex(key);
+        if (entries[index] != null) {
+            entries[index] = null;
+            size--;
+        }
     }
 
     private static class Entry<K,V> {
